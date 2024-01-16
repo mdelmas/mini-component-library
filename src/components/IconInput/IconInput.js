@@ -11,7 +11,7 @@ const STYLES = {
     iconSize: 16,
     iconStrokeWidth: 1,
     general: {
-      "--font-size": "14px",
+      "--font-size": 14 / 16 + "rem",
       "--border-width": "1px",
       "--padding": "4px 0 4px 24px",
     },
@@ -23,7 +23,7 @@ const STYLES = {
     iconSize: 24,
     iconStrokeWidth: 2,
     general: {
-      "--font-size": "18px",
+      "--font-size": 18 / 16 + "rem",
       "--border-width": "2px",
       "--padding": "7px 0 7px 36px",
     },
@@ -40,7 +40,7 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
       <VisuallyHidden>
         <label for={label}>{label}</label>
       </VisuallyHidden>
-      <NativeInput
+      <TextInput
         type="text"
         name={label}
         id={label}
@@ -57,17 +57,18 @@ const IconInput = ({ label, icon, width = 250, size, placeholder }) => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.label`
   position: relative;
 `;
 
-const NativeInput = styled.input`
+const TextInput = styled.input`
   width: var(--width);
   height: auto;
 
-  border: none;
-
   padding: var(--padding);
+
+  border: none;
+  border-bottom: var(--border-width) solid ${COLORS.black};
 
   color: ${COLORS.gray700};
   background-color: transparent;
@@ -77,8 +78,6 @@ const NativeInput = styled.input`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
-  border-bottom: var(--border-width) solid ${COLORS.black};
 
   &::placeholder {
     color: ${COLORS.gray500};
@@ -104,7 +103,9 @@ const StyledIcon = styled(Icon)`
 
   color: ${COLORS.gray700};
 
-  ${NativeInput}:hover + & {
+  pointer-events: none;
+
+  ${TextInput}:hover + & {
     color: ${COLORS.black};
   }
 `;
