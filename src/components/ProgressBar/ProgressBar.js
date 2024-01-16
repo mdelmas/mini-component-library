@@ -23,26 +23,29 @@ const SIZES = {
 
 const ProgressBar = ({ value, size }) => {
   return (
-    <ProgressBarWrapper style={SIZES[size]}>
-      <ProgressIndicatorWrapper>
-        <ProgressIndicator
-          style={{ "--progress": value + "%" }}
-        ></ProgressIndicator>
-      </ProgressIndicatorWrapper>
-    </ProgressBarWrapper>
+    <Wrapper
+      style={SIZES[size]}
+      role="progressbar"
+      aria-valuenow={value}
+      aria-valuemin={0}
+      aria-valuemax={100}
+    >
+      <VisuallyHidden>{value}%</VisuallyHidden>
+      <BarWrapper>
+        <Bar style={{ "--progress": value + "%" }}></Bar>
+      </BarWrapper>
+    </Wrapper>
   );
 };
 
-const ProgressBarWrapper = styled.div`
+const Wrapper = styled.div`
   background-color: ${COLORS.transparentGray15};
   width: 100%;
 
   box-shadow: 0px 2px 4px 0px ${COLORS.transparentGray35} inset;
 `;
-/* min-width: 300px;
-  width: 100%; */
 
-const ProgressIndicatorWrapper = styled.div`
+const BarWrapper = styled.div`
   overflow: clip;
   border-radius: 4px;
 
@@ -50,7 +53,7 @@ const ProgressIndicatorWrapper = styled.div`
   width: 100%;
 `;
 
-const ProgressIndicator = styled.div`
+const Bar = styled.div`
   background-color: ${COLORS.primary};
   width: var(--progress);
   height: 100%;
